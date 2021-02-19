@@ -15,27 +15,7 @@ export const StyledColorBar = Styled.div`
   grid-area: color-bar;
   background-image: linear-gradient(180deg, ${colorBarHotOrange}, ${colorBarHotYellow});
 
-  @media(max-width: 425px){
+  @media(max-width: 768px){
     background-image: linear-gradient(240deg, ${colorBarHotOrange}, ${colorBarHotYellow});
   }
 `;
-
-export const StyledAside = Styled.aside`
-  grid-area: aside;
-`;
-
-export const StyledFooter = Styled.footer`
-  grid-area: footer;
-`;
-
-export const StyledMain = Styled.main`
-  grid-area: main;
-`;
-
-export const StyledNavigation = Styled.nav`
-  grid-area: navigation;
-`;
-
-export const StyledInput = Styled.input``;
-
-export const Styledtitle = Styled.h1``;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyledFooter} from '../UI';
+import Styled from 'styled-components';
 
 
 const Footer = () => 
@@ -7,3 +7,7 @@ const Footer = () =>
 ;
 
 export default Footer;
+
+const StyledFooter = Styled.footer`
+  grid-area: footer;
+`;
