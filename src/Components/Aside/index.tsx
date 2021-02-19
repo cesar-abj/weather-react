@@ -1,20 +1,10 @@
 import React from 'react';
 import DateHelper from '../../helpers/DateHelper';
-import { Paragraph, StyledAside } from '../UI';
+import Styled from 'styled-components';
+import { Paragraph } from '../UI';
+import { ILocation, ICurrent } from '../../App';
 
-const dateHelper = new DateHelper()
-
-interface ILocation {
-  name: string,
-  country: string,
-  localTime: string,
-  region: string,
-};
-
-interface ICurrent {
-  tempC: number,
-};
-
+const dateHelper = new DateHelper();
 
 const Aside = (props: {location: ILocation, current: ICurrent}) => {
 
@@ -42,3 +32,7 @@ function brasilWithLetterS(param: string){
 };
 
 export default Aside;
+
+const StyledAside = Styled.aside`
+  grid-area: aside;
+`;
