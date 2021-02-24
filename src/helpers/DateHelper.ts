@@ -1,5 +1,5 @@
 export default class DateHelper {
-  getDateWithoutYear(dateParam: Date){
+  getDateWithoutYear(dateParam: string){
 
     let date = new Date(dateParam);
     let atualDay = new Date().getDate();
@@ -32,7 +32,7 @@ export default class DateHelper {
     return `${hours}:${minutes} - Horário local`;
   };
   
-  getHour(hourParam: Date): string{
+  getHour(hourParam: string): string{
     let time = new Date(hourParam);
     let hours = time.getHours();
     let minutes = `${time.getMinutes() < 10 ? '0' : ''}${time.getMinutes()}`;

@@ -1,24 +1,40 @@
 import React from 'react';
 import Styled from 'styled-components';
-import { IForecast } from '../../App';
 import dateHelper from '../../helpers/DateHelper';
+import {IDay, IHour} from '../../App';
 
 const dayMonth = new dateHelper().getDateWithoutYear;
+const hourDay = new dateHelper().getHour;
 
+const Main = (props: {day: IDay[], hour: IHour[]}) => {
 
-const Main = (props: {propForecast: IForecast[]}) => {
   return(
     <StyledMain>
       <Card>
-      {props.propForecast.map((item, index) => {
-        return(
-          <ContentCard key={index} >
-            <h1>{dayMonth(item.date)}</h1>
-            <img src={item.day.condition.icon} alt="icone do clima"/>
-            <p>{item.day.condition.text}</p>
-          </ContentCard>  
-        );
-      })}
+      {
+        props.day.map((item, index) => {
+          return(
+            <ContentCard key={index} >
+              <h1>{dayMonth(item.date)}</h1>
+              <img src={item.condition.icon} alt="imagem representativa do clima"/>
+              <p>{item.condition.text}</p>
+            </ContentCard>
+          );
+        })
+      }
+      </Card>
+      <Card>
+        {
+          props.hour.slice(new Date(Date.now()).getHours(), new Date(Date.now()).getHours() + 3).map((item, index) => {
+            return(
+              <ContentCard key={index}>
+                <h1>{hourDay(item.time)}</h1>
+                <img src={item.condition.icon} alt="imagem representativa do clima hora"/>
+                <p>{}</p>
+              </ContentCard>
+            );
+          })
+        }
       </Card>
     </StyledMain>
   );
@@ -33,6 +49,7 @@ const StyledMain = Styled.main`
 const ContentCard = Styled.div`
   display: grid;
   place-items: center;
+  text-align: center;
 `;
 
 const Card = Styled.div`
@@ -48,6 +65,3 @@ const Card = Styled.div`
   border-style: ; 
   padding: .5rem;
 `;
-
-
-
