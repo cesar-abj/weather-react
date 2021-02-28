@@ -7,8 +7,6 @@ v2.0 | 20110126
 License: none (public domain)
 */
 
-background-color: #F2F7F8;;
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
