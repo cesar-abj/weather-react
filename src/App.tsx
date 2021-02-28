@@ -14,7 +14,7 @@ import { IDay, IHour, IAstro } from './helpers/interfaceHelper';
 
 
 // const inputNav = document.querySelector('.data-input-nav') as HTMLInputElement ;
-const fetchUrl = `http://api.weatherapi.com/v1/forecast.json?key=82b2553312b843208ae12719200812&q=brasilia&days=3&lang=pt`;
+const fetchUrl = `https://api.weatherapi.com/v1/forecast.json?key=82b2553312b843208ae12719200812&q=brasilia&days=3&lang=pt`;
 
 const App: React.FC = () => {
 
