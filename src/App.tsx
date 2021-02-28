@@ -203,6 +203,7 @@ const App: React.FC = () => {
     fetchWeatherData(fetchUrl);
 
     // preciso encontrar um meio de concertar essa advertencia
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
  
