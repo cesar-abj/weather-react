@@ -5,7 +5,7 @@ export default class Api {
     this._url = url;
   };
 
-  async fetchApi() {
+  async fetchApi(): Promise<object> {
     let api = await fetch(this._url)
       .then(response => response.json())
     return api;

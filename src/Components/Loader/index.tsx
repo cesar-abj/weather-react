@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import imgBackground from './img/nuvem.png';
+import imgBackground from '../UI/img/nuvem.png';
 
 const BackgroundStyled = Styled.div`
   display: grid;
@@ -8,8 +8,6 @@ const BackgroundStyled = Styled.div`
   height: 100vh;
   width: 100%;
 `;
-
-
 
 const LoaderBackground = () => {
   return (

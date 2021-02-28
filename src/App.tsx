@@ -6,16 +6,19 @@ import ColorBar from './Components/ColorBar';
 import Footer from './Components/Footer';
 import Main from './Components/Main';
 import Navigation from './Components/Navigation';
-import { StyledContainer } from './Components/UI';
 import { GlobalStyle } from './Components/globalStyle';
 import Loader from './Components/Loader';
 import Error from './Components/Error';
 import Api from './api';
+import { IDay, IHour, IAstro } from './helpers/interfaceHelper';
 
-const App = () => {
+
+// const inputNav = document.querySelector('.data-input-nav') as HTMLInputElement ;
+const fetchUrl = `http://api.weatherapi.com/v1/forecast.json?key=82b2553312b843208ae12719200812&q=brasilia&days=3&lang=pt`;
+
+const App: React.FC = () => {
 
   // url para requisição na www.weatherapi.com
-  const fetchUrl = 'http://api.weatherapi.com/v1/forecast.json?key=82b2553312b843208ae12719200812&q=rio claro&days=3&lang=pt';  
 
   // definido estados iniciais com seus respectivos tipos
   const [loading, setLoading] = useState(false);
@@ -28,8 +31,7 @@ const App = () => {
 
   const [astro, setAstro] = useState<IAstro[]>([]);  
 
-  const [current, setCurrent] = useState(
-    {
+  const [current, setCurrent] = useState({
     cloud: 0,
     condition: {
       text: '', 
@@ -58,8 +60,6 @@ const App = () => {
     name: '',
     region: '',
   });
-  
-  // const [forecast, setForecast] = useState<IForecast[]>([]);
   
   // função responsvel por distribuir os estados da aplicação
   const setState = (data: any) => {
@@ -93,7 +93,7 @@ const App = () => {
       windMph: data.current.wind_mph,
     });
 
-    data.forecast.forecastday.reverse().forEach((item: {day: any, date: string}) => {
+    data.forecast.forecastday.reverse().forEach((item: {day: any, date: string, astro: any}) => {
 
       setDay(prevState => [{
         avgHumidity: item.day.avghumidity,
@@ -117,6 +117,12 @@ const App = () => {
       }, ...prevState].slice(0, 3));
       // o slice garante que meu array vai possuir apenas o 3 items mais recentes
       // assim não acumulando as pesquisas anteriores
+      setAstro(prevState => [{
+        moonIllumination: item.astro.moon_illumination,
+        moonPhase: item.astro.moon_phase,
+        sunrise: item.astro.sunrise,
+        sunset: item.astro.sunset,
+      }, ...prevState]);
     });
 
     data.forecast.forecastday[2].hour.reverse().forEach((item: any) => {
@@ -147,54 +153,73 @@ const App = () => {
         windMph: item.wind_mph,
         windChillC: item.windchill_c
       }, ...prevState])
-    })
+    });
   };
- 
-  useEffect(() => {
-    // função responsavel por fazer a requisição
-    const fetchWeatherData = async () => {
-      
-      const api = new Api(fetchUrl).fetchApi();
-      
-      try{
-        const request = api
-        .then((data) => {
-          
-          setState(data);
-          // seta o valor do estate loading para true
-          setLoading(true);
-          
-        })
-        .catch(error => {
-          setError(true)
-          return console.log(error)
-        })
+
+  const fetchWeatherData = async (fetchUrl: string) => {
+
+    const api = new Api(fetchUrl).fetchApi();
+    
+    try{
+      const request = api
+      .then((data) => {
+        
+        setState(data);
+        setLoading(true);          
+        setError(false);
+      })
+      .catch(error => {
+
+        setError(true)
+        return console.log(error)
+      })
 
       return request;
 
     }catch(error){
-      console.log(error)
-      setError(true);
-    };
-    };
+    
+    console.log(error)
+    setError(true);
+  }};
 
-    fetchWeatherData();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+    e.preventDefault();
+
+    const inputNav = document.querySelector('[data-input-nav]') as HTMLInputElement;
+    
+    const valueOfInputNav = inputNav.value;
+    
+    fetchWeatherData(`http://api.weatherapi.com/v1/forecast.json?key=82b2553312b843208ae12719200812&q=${valueOfInputNav}&days=3&lang=pt`);    
+
+    inputNav.value = '';
+  };
+
+
+ 
+  useEffect(() => {
+    // função responsavel por fazer a requisição
+
+    fetchWeatherData(fetchUrl);
+
+    // preciso encontrar um meio de concertar essa advertencia
   }, []);
-
+  
+ 
   return(
     error ? 
     <Container>
       <GlobalStyle />
-      <Navigation />
+      <Navigation submit={handleSubmit} />
       <Error />
     </Container> :
     loading ? 
     <Container>
       <GlobalStyle />
-      <Navigation />
-      <ColorBar />
-      <Aside location={location} current={current} />
-      <Main day={day} hour={hour} />
+      <Navigation submit={handleSubmit} />
+      <ColorBar current={current} />
+      <Aside location={location} current={current} day={day} />
+      <Main day={day} hour={hour} location={location} current={current} astro={astro} />
       <Footer />
     </Container>
     : <Loader />
@@ -205,11 +230,12 @@ export default App;
 
 // Styled components css
 
-const Container = Styled(StyledContainer)`
-  font-family: 'Noto Sans', sans-serif;
+const Container = Styled.div`
+
+  font-family: 'Roboto', sans-serif;
   display: grid;
-  grid-template-columns: auto auto minmax(auto, 30px) auto;
-  grid-template-rows: minmax(auto, 100px) auto minmax(auto, 100px);
+  grid-template-columns: auto auto 30px auto;
+  grid-template-rows: 100px auto 100px;
   grid-template-areas: "navigation navigation color-bar aside"
                        "main main color-bar aside"
                        "main main color-bar footer"
@@ -233,91 +259,3 @@ const Container = Styled(StyledContainer)`
     ;
   };
 `;
-export interface ICurrent {
-  cloud: number,
-  condition: {
-    text: string, 
-    icon: string
-  },
-  feelsLikeC: number,
-  gustMph: number,
-  humidity: number,
-  precipMm: number,
-  pressureMb: number,
-  tempC: number,
-  uv: number,
-  visKm: number,
-  windDegree: number,
-  windDir: string,
-  windMph: number,
-};
-export interface ILocation {
-  name: string;
-  region: string;
-  country: string;
-  lat: number;
-  long: number;
-  localTimeEpoch: string;
-  localTime: string;
-};
-export interface IDay {
-  avgHumidity: number,
-  avgTempC:number,
-  avgVisKm: number,
-  condition: {
-    code: number,
-    icon: string,
-    text: string,
-  },
-  dailyChanceOfRain: string,
-  dailyChanceOfSnow: string,
-  dailyWillItRain: number,
-  dailyWillItSnow: number,
-  date: string,
-  maxTempC: number,
-  maxWindMph: number,
-  minTempC: number,
-  totalPrecipMm: number,
-  uv: number,
-};
-export interface IHour {
-  chanceOfRain: string,
-  chanceOfSnow: string,
-  cloud: number,
-  condition: {
-    code: number,
-    icon: string,
-    text: string,
-  },
-  dewPointC: number,
-  feelsLikeC: number,
-  gustMph: number,
-  heatIndexC: number,
-  humidity: number,
-  isDay: number,
-  precipMm: number,
-  pressureMb: number,
-  tempC: number,
-  time: string,
-  visKm: number,
-  willItRain: number,
-  willItSnow: number,
-  windDegree: number,
-  windDir: string,
-  windMph: number,
-  windChillC: number,
-};
-export interface IAstro {
-  moonIllumination: string,
-  moonPhase: string,
-  sunrise: string,
-  sunset: string,
-};
-export interface IForecast {
-  astro: IAstro,
-  date: string,
-  day: IDay,
-  hour: IHour,
-  current: ICurrent,
-  location: ILocation
-}

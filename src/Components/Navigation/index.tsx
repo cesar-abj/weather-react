@@ -1,16 +1,23 @@
 import React from 'react';
 import Styled from 'styled-components';
-import {  StyledContainer, } from '../UI';
 import { colorBarColdBlue } from '../UI/variaveis';
 import Title from '../Title';
+import imgBackground from '../UI/img/nuvem.png';
 
-const Navigation = () =>
+
+
+const Navigation = (props: {submit: React.FormEventHandler<HTMLFormElement> | undefined}) =>
   <StyledNav>
+    
     <Container size='1.6rem' mobileSize='1.3rem'>
+      <Img src={imgBackground} />
       <Title head='h1'>Weather - Abj</Title>
     </Container>
+
     <Container>
-      <Input type="text" placeholder="Busca"/>
+      <form onSubmit={props.submit}>
+        <Input type="text" placeholder="Busca" data-input-nav />
+      </form>
     </Container>
   </StyledNav>
 ;
@@ -29,12 +36,12 @@ const StyledNav = Styled.nav`
   }
 `;
 
-const Container = Styled(StyledContainer).attrs((props:{size?:string, border?:string, mobileSize?: string}) => ({
+const Container = Styled.div.attrs((props:{size?:string, border?:string, mobileSize?: string}) => ({
   size: props.size,
   mobileSize: props.mobileSize,
 }))`
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
   font-size: ${props => props.size};
   
   @media(max-width: 768px){
@@ -56,6 +63,12 @@ const Input = Styled.input`
     max-width: 9rem;
     font-size: 1rem;
   }
+`;
+
+const Img = Styled.img`
+  width: 2rem;
+  height: 2rem;
+  padding-right: 10px;
 `;
 
 export default Navigation;

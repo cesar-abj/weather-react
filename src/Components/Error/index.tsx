@@ -1,9 +1,8 @@
 import Styled from 'styled-components';
-import { StyledContainer } from '../UI';
 
 const Error = () => {
   return(
-    <Container>
+    <Container className='error' >
       <svg width="250" height="500" viewBox="0 0 86 154" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect y="28" width="80" height="76" rx="3" fill="#EEBDBD"/>
         <rect opacity="0.4" x="5.5" y="33.5" width="69" height="54" fill="white" stroke="black"/>
@@ -22,9 +21,16 @@ const Error = () => {
 
 export default Error;
   
-const Container = Styled(StyledContainer)`
+const Container = Styled.div`
+
   display: grid;
+  grid-area: main;
   place-items: center;
-  width: 100%
-  height: 100vh;
+
+  @media(max-width: 768px){
+    display: grid;
+    place-items: center;
+    width: 100%
+    height: 100vh;
+  }
 `;
