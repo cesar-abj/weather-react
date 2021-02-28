@@ -190,7 +190,7 @@ const App: React.FC = () => {
     
     const valueOfInputNav = inputNav.value;
     
-    fetchWeatherData(`http://api.weatherapi.com/v1/forecast.json?key=82b2553312b843208ae12719200812&q=${valueOfInputNav}&days=3&lang=pt`);    
+    fetchWeatherData(`https://api.weatherapi.com/v1/forecast.json?key=82b2553312b843208ae12719200812&q=${valueOfInputNav}&days=3&lang=pt`);    
 
     inputNav.value = '';
   };
