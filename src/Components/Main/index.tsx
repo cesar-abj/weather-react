@@ -3,9 +3,9 @@ import Styled from 'styled-components';
 import dateHelper from '../../helpers/DateHelper';
 import {IAstro, ICurrent, IDay, IHour, ILocation} from '../../helpers/interfaceHelper';
 import {Paragraph} from '../UI/index';
-import imgMoon from '../UI/img/112.png';
-import imgSun from '../UI/img/113.png';
-import imgArrow from '../UI/img/arrow.png';
+import imgMoon from '../UI/img/lua.svg';
+import imgSun from '../UI/img/sol.svg';
+import imgArrow from '../UI/img/arrow.svg';
 
 const dayMonth = new dateHelper().getDateWithoutYear;
 const hourDay = new dateHelper().getHour;

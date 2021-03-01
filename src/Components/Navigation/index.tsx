@@ -2,7 +2,7 @@ import React from 'react';
 import Styled from 'styled-components';
 import { colorBarColdBlue } from '../UI/variaveis';
 import Title from '../Title';
-import imgBackground from '../UI/img/nuvem.png';
+import imgBackground from '../UI/img/nuvem.svg';
 
 
 

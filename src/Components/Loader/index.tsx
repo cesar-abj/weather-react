@@ -1,6 +1,6 @@
 import React from 'react';
 import Styled from 'styled-components';
-import imgBackground from '../UI/img/nuvem.png';
+import imgBackground from '../UI/img/nuvem.svg';
 
 const BackgroundStyled = Styled.div`
   display: grid;
