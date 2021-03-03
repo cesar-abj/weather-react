@@ -47,7 +47,7 @@ const App: React.FC = () => {
     visKm: 0,
     windDegree: 0,
     windDir: '',
-    windMph: 0,
+    windKph: 0,
   }
   );
   
@@ -90,7 +90,7 @@ const App: React.FC = () => {
       visKm: data.current.vis_km,
       windDegree: data.current.wind_degree,
       windDir: data.current.wind_dir,
-      windMph: data.current.wind_mph,
+      windKph: data.current.wind_kph,
     });
 
     data.forecast.forecastday.reverse().forEach((item: {day: any, date: string, astro: any}) => {
