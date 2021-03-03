@@ -13,7 +13,7 @@ const hourDay = new dateHelper().getHour;
 const Main = (props: {day: IDay[], hour: IHour[], location: ILocation, current: ICurrent, astro: IAstro[]}) => {
 
   const { name, lat, long } = props.location;
-  const { feelsLikeC, pressureMb, humidity, gustMph, windDir, visKm, uv } = props.current;
+  const { feelsLikeC, pressureMb, humidity, windKph, windDir, visKm, uv } = props.current;
   const { sunrise, sunset } = props.astro[0];
   const { maxTempC, minTempC } = props.day[0]
   
@@ -129,7 +129,7 @@ const Main = (props: {day: IDay[], hour: IHour[], location: ILocation, current: 
           <Paragraph padding='3px 0' fontWeight='bold' >{`${uv}`}</Paragraph>
 
           <Paragraph padding='3px 0' fontWeight='bold'>Vel. vento:</Paragraph>
-          <Paragraph padding='3px 0' fontWeight='bold' >{`${gustMph} Km/h`}</Paragraph>
+          <Paragraph padding='3px 0' fontWeight='bold' >{`${windkph} Km/h`}</Paragraph>
 
           <Paragraph padding='3px 0' fontWeight='bold'>Visibilidade:</Paragraph>
           <Paragraph padding='3px 0' fontWeight='bold' >{`${visKm} Km`}</Paragraph>
