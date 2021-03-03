@@ -129,7 +129,7 @@ const Main = (props: {day: IDay[], hour: IHour[], location: ILocation, current: 
           <Paragraph padding='3px 0' fontWeight='bold' >{`${uv}`}</Paragraph>
 
           <Paragraph padding='3px 0' fontWeight='bold'>Vel. vento:</Paragraph>
-          <Paragraph padding='3px 0' fontWeight='bold' >{`${windkph} Km/h`}</Paragraph>
+          <Paragraph padding='3px 0' fontWeight='bold' >{`${windKph} Km/h`}</Paragraph>
 
           <Paragraph padding='3px 0' fontWeight='bold'>Visibilidade:</Paragraph>
           <Paragraph padding='3px 0' fontWeight='bold' >{`${visKm} Km`}</Paragraph>
