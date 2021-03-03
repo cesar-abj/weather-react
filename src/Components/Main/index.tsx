@@ -22,7 +22,7 @@ const Main = (props: {day: IDay[], hour: IHour[], location: ILocation, current: 
 
       {/* Card today weather */}
       <Card>
-        <Paragraph padding='0 0 10px 0' fontWeight='bold' fontSize='1.5rem'>Temperatura media diaria</Paragraph>
+        <Paragraph padding='0 0 10px 0' fontWeight='bold' fontSize='1.5rem'>Clima predominante</Paragraph>
         <ContainerCard>
         {
           props.day.map((item, index) => {
@@ -40,6 +40,26 @@ const Main = (props: {day: IDay[], hour: IHour[], location: ILocation, current: 
         </ContainerCard>
       </Card>
       {/*end card today weather */}
+
+      {/* Card temperature */}
+      <Card>
+        <Paragraph padding='0 0 10px 0' fontWeight='bold' fontSize='1.5rem'>Temperatura media diaria</Paragraph>
+        <ContainerCard>
+        {
+          props.day.map((item, index) => {
+            return(
+
+              <ContentCard key={index} >
+
+                <Paragraph fontWeight='bold'>{dayMonth(item.date)}</Paragraph>
+                <Paragraph fontSize='2rem' fontWeight='bold' padding='.5rem'>{`${item.avgTempC}°`}</Paragraph>
+              </ContentCard>
+            );
+          })
+        }
+        </ContainerCard>
+      </Card>
+      {/*end card weather */}
 
       {/* Card hours weather */}
       <Card>

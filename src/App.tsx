@@ -193,6 +193,7 @@ const App: React.FC = () => {
     fetchWeatherData(`https://api.weatherapi.com/v1/forecast.json?key=82b2553312b843208ae12719200812&q=${valueOfInputNav}&days=3&lang=pt`);    
 
     inputNav.value = '';
+    inputNav.blur();
   };
 
 
@@ -232,8 +233,9 @@ export default App;
 // Styled components css
 
 const Container = Styled.div`
-
+  
   font-family: 'Roboto', sans-serif;
+
   display: grid;
   grid-template-columns: auto auto 30px auto;
   grid-template-rows: 100px auto 100px;
