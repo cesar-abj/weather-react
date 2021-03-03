@@ -14,7 +14,7 @@ export interface ICurrent {
   visKm: number,
   windDegree: number,
   windDir: string,
-  windMph: number,
+  windKph: number,
 };
 
 export interface ILocation {
